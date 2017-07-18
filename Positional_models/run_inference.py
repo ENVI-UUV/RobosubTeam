@@ -6,31 +6,13 @@ Created on Sun Jul 16 17:26:29 2017
 @author: joe
 """
 
-import numpy as np # linear algebra
-import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
-import os
-import math
-import random
-
-from keras import optimizers
-from keras.models import Sequential, Model
-from keras.layers import Dense, Dropout, Flatten, GlobalAveragePooling2D, Input
-from keras.layers import Conv2D, MaxPooling2D, concatenate
-from keras.callbacks import ModelCheckpoint
-from keras.optimizers import RMSprop, Adam, Adadelta
+from keras.models import Model
+from keras.layers import Dense, GlobalAveragePooling2D, Input
+from keras.layers import concatenate
+from keras.optimizers import Adam
 from keras.applications.inception_v3 import InceptionV3
-from keras.applications.resnet50 import ResNet50
-from keras_squeezenet import SqueezeNet
-
-from textwrap import wrap
-import matplotlib.image as mpimg
 import cv2
-import matplotlib.pyplot as plt
-from mpl_toolkits.axes_grid1 import ImageGrid
-
-from sklearn.model_selection import train_test_split
-from sklearn.utils import shuffle
-from sklearn import preprocessing
+import numpy as np 
 
 
 def combine_4_image(img1, img2, img3, img4):
@@ -99,20 +81,20 @@ class inference_runner():
         return self.__trained_model.predict([tensor_img, tensor_positions])
 
 # Tests
-img_path = "/home/joe/Dev/robot/auto pilot batch 1/{}"
-forward_last_img_path = img_path.format("autofwdB1.png")
-down_last_img_path = img_path.format("autofwdB1.png")
-forward_current_img_path = img_path.format("autofwdB2.png")
-down_current_img_path = img_path.format("autofwdB2.png")
-forward_last_img = cv2.imread('{}'.format(forward_last_img_path))
-down_last_img = cv2.imread('{}'.format(down_last_img_path))
-forward_current_img = cv2.imread('{}'.format(forward_current_img_path))
-down_current_img = cv2.imread('{}'.format(down_current_img_path))
-positions = [-4.9278298848, -1.045838346, -25.872343062,1.2358679902]
-model_path = '/home/joe/Dev/robot/models/InceptionV3_fc512_X2_pos-33.hdf5'
-position_predictor = inference_runner(model_path)
-output = position_predictor.run_inference(positions, forward_last_img,
-                      down_last_img, forward_current_img,
-                      down_current_img)
-
-print(output)
+#img_path = "/home/joe/Dev/robot/auto pilot batch 1/{}"
+#forward_last_img_path = img_path.format("autofwdB1.png")
+#down_last_img_path = img_path.format("autofwdB1.png")
+#forward_current_img_path = img_path.format("autofwdB2.png")
+#down_current_img_path = img_path.format("autofwdB2.png")
+#forward_last_img = cv2.imread('{}'.format(forward_last_img_path))
+#down_last_img = cv2.imread('{}'.format(down_last_img_path))
+#forward_current_img = cv2.imread('{}'.format(forward_current_img_path))
+#down_current_img = cv2.imread('{}'.format(down_current_img_path))
+#positions = [-4.9278298848, -1.045838346, -25.872343062,1.2358679902]
+#model_path = '/home/joe/Dev/robot/models/InceptionV3_fc512_X2_pos-33.hdf5'
+#position_predictor = inference_runner(model_path)
+#output = position_predictor.run_inference(positions, forward_last_img,
+#                      down_last_img, forward_current_img,
+#                      down_current_img)
+#
+#print(output)
